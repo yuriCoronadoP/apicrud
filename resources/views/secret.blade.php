@@ -39,10 +39,10 @@
                         <td>{{$value->email}}</td>
                         <td class="text-center">{!!($value->active == 1) ? '<i class="fa-2x text-success fa-regular fa-circle-check"></i>' : '<i class="fa-2x text-secondary fa-regular fa-circle"></i>'!!}</td>
                         <td>
-                            <a href="edit.php?id=<?php echo $value->id; ?>" class="btn btn-secondary">
+                            <a href="edit.php?id={{$value->id}}" class="btn btn-secondary">
                                 <i class="fa-solid fa-pen-to-square"></i>
                             </a>
-                            <a href="delete.php?id=<?php echo $value->id; ?>" class="btn btn-danger">
+                            <a href="delete.php?id={{$value->id}}" class="btn btn-danger">
                                 <i class="fa-solid fa-trash-can"></i>
                             </a>
                         </td>

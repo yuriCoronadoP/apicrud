@@ -35,7 +35,7 @@ class ApiController extends Controller
         // si existe 
         if($user){
             // desencripta y evalua si el password indicado por el usuario coincide con el de bd
-            if(Hash::check($data->password, $user->password )){
+            if(Hash::check($data->password, $user->password)){
                 // crea token
                 $token = $user->createToken("example");
                 // guarda mensjae de exito

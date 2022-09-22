@@ -35,18 +35,19 @@ class LoginController extends Controller
     }
 
     public function login(Request $request){
+        
         // dd(route('privada'));
         // validacion de datos
 
-        $credentials = [
-            "email" => $request->email,
-            "password" => $request->password,
-            "active" => true
-        ];
+        $credentials = $request->only([
+            "email",
+            "password",
+            "active"
+        ]);
 
         // mantener sesion iniciada
         $remember = ($request->has('remember') ? true : false);
-
+        
         // intento de inicio de sesion
         if(Auth::attempt($credentials,$remember)){
             // si los datos son correctos
