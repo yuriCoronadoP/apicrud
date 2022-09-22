@@ -33,7 +33,9 @@ class LoginController extends Controller
         return redirect(route('privada'));
 
     }
+
     public function login(Request $request){
+        // dd(route('privada'));
         // validacion de datos
 
         $credentials = [
@@ -58,6 +60,7 @@ class LoginController extends Controller
         }
 
     }
+
     public function logout(Request $request){
         // Usamos la funcion auth
         Auth::logout();
