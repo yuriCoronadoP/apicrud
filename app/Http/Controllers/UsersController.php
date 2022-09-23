@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+// importamos para encrpatar contraseñas
+use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
@@ -48,7 +50,10 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        //
+        // echo $id." show";
+        $response = [];
+        $response['data'] = User::findOrFail($id);
+        return view('edit', compact('response'));
     }
 
     /**
@@ -60,6 +65,7 @@ class UsersController extends Controller
     public function edit($id)
     {
         //
+        
     }
 
     /**
@@ -71,7 +77,14 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // dd($request);
+        $user = User::findOrFail($id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->active = (isset($request->active));
+        $user->password = Hash::make($request->password);
+        $user->save();
+        return redirect('/privada');
     }
 
     /**
@@ -82,6 +95,9 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        
+        $user->delete();
+        return redirect('/privada');
     }
 }

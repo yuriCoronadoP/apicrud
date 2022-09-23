@@ -15,16 +15,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
+Route::view('/', "login");
 Route::view('/login', "login")->name('login');
 Route::view('/registro', "register")->name('registro');
 // añadimos un middleware que busque sesiones activas para dejar entrar o redirija al login
 // Route::view('/privada', "secret")->middleware('auth')->name('privada');
 Route::group(['middleware' => ['auth']], function(){
     Route::get('/privada', [UsersController::class, 'index'])->name('privada');
+    Route::resource('usuario', UsersController::class);
 }); // END MIDDLEWARE
 
 Route::post('/validar-registro', [LoginController::class, 'register'])->name('validar-registro');

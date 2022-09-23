@@ -12,14 +12,14 @@
     <main class="container">
         <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
             <a class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none" href="#">
-                Página privada @auth de {{Auth::user()->name}} @endauth
+                Bienvenido @auth de {{Auth::user()->name}} @endauth
             </a>
             <div class="col-md-3 text-end">
                 <a href="{{route('logout')}}" class="btn btn-outline-primary me-2">Salir</a>
             </div>
         </header>
 
-        <div class="col-md-8">
+        <div class="col-md-12">
             <table class="table table-bordered">
                 <thead>
                     <tr>
@@ -39,21 +39,27 @@
                         <td>{{$value->email}}</td>
                         <td class="text-center">{!!($value->active == 1) ? '<i class="fa-2x text-success fa-regular fa-circle-check"></i>' : '<i class="fa-2x text-secondary fa-regular fa-circle"></i>'!!}</td>
                         <td>
-                            <a href="edit.php?id={{$value->id}}" class="btn btn-secondary">
+                            <a href="usuario/{{$value->id}}" class="btn btn-secondary">
                                 <i class="fa-solid fa-pen-to-square"></i>
                             </a>
-                            <a href="delete.php?id={{$value->id}}" class="btn btn-danger">
-                                <i class="fa-solid fa-trash-can"></i>
-                            </a>
+                            <form action="{{url("usuario/{$value->id}")}}" method="POST" class="d-inline">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-danger">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </button>
+                            </form>
                         </td>
                     </tr>
                     <?php } ?>
                 </tbody>
             </table>
         </div>
+
+        <div>
+            <p><a href="{{route('registro')}}">Registrar nuevo usuario</a></p>
+        </div>
     </main>
-    <article class="container">
-        <h2>Tu sesión privada</h2>
-    </article>
+    
 </body>
 </html>
